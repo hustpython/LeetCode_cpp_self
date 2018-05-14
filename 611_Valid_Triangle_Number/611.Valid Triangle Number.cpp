@@ -107,6 +107,32 @@ public:
         }
     return ret;
     }
+    //Accepted
+    int triangle_fromlasttofirst(vector<int>&nums)
+    //从后向前遍历
+    {
+        int count = 0;
+        int n = nums.size();
+        sort(nums.begin(),nums.end());
+        for(int i = n-1;i>=2;--i)
+        {
+            int left = 0;
+            int right = i - 1;
+            while(left<right)
+            {
+                if(nums[left] + nums[right] > nums[i])
+                {
+                    count += right - left;
+                    -- right;
+                }
+                else 
+                {
+                    ++ left;
+                }
+            }
+        }
+        return count;
+    }
 };
 
 int main()
@@ -120,6 +146,6 @@ int main()
     //counttri = sol.triangleNum_brute_force(b);
     //counttri = sol.triangleNumber_binarysearch(b);
     //counttri = sol.triangleNumber_linear_scan(b);
-    counttri = sol.triangleNumber(b);
+    counttri = sol.triangle_fromlasttofirst(b);
     cout << counttri << endl;
 }
